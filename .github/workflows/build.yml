@@ -11,12 +11,8 @@ jobs:
         run: git clone https://github.com/Yarmek/qmk_firmware.git
       - name: Install qmk deps
         run: cd qmk_firmware && ./util/qmk_install.sh && python3 -m pip install qmk
-      - name: fix gcc
-        run: sudo chmod +x .github/scripts/update-gcc10-ubuntu.sh && sudo bash .github/scripts/update-gcc10-ubuntu.sh
       - name: Install git submodules
         run: cd qmk_firmware && make git-submodule
-      - name: Copy custom keymaps
-        run: cp -rp keyboards/rgbkb/sol3/keymaps/yarmek qmk_firmware/keyboards/rgbkb/sol3/keymaps
       - name: Compile firmware
         run: cd qmk_firmware && make rgbkb/sol3/rev1:yarmek
       - name: Upload compiled firmware (build artifact)
