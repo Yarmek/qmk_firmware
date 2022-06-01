@@ -1,4 +1,4 @@
-name: Build Firmware
+name: Build Sol3 Firmware
 
 on:
   push:
