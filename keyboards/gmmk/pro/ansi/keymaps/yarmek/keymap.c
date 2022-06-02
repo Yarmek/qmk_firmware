@@ -1,12 +1,15 @@
 /* Copyright 2021 Glorious, LLC <salman@pcgamingrace.com>
+
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
 (at your option) any later version.
+
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
+
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -17,6 +20,8 @@ enum userspace_layers {
   QWERTY,
 	FNLAYER,
 	POPTAB,
+    VIA_1,
+    VIA_2
 };
 
 //custom keycodes
@@ -66,6 +71,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______,                            _______,                            _______, _______, KC_TRNS, _______, _______, _______
     ),
 
+    [VIA_1] = LAYOUT(
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,
+        _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______,
+        _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______, _______
+    ),
+
+    [VIA_2] = LAYOUT(
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,
+        _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______,
+        _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______, _______
+    ),
 
 };
 
@@ -102,13 +124,15 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     switch(get_highest_layer(layer_state)) {
     // special handling per layer
-        case 0:  //layer one
+        case QWERTY:  // qwerty layer and the two via layers
+        case VIA_1:
+        case VIA_2:
             if (host_keyboard_led_state().caps_lock)
                 rgb_matrix_set_color_all(255,0,0);
             else
-                rgb_matrix_set_color_all(0,255,56);
+                rgb_matrix_set_color_all(255,255,255);
             break;
-        case 1:
+        case FNLAYER:
             for (uint8_t i = led_min; i < led_max; i++) {
                  RGB_MATRIX_INDICATOR_SET_COLOR(i,0,0,0);
             }

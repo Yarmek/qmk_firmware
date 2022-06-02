@@ -17,3 +17,6 @@ FN + W maximizes current application
 FN + E moves current application one monitor to the right  
 FN + S minimizes current application  
 FN + F is used in junction with the "Popout tab" extension to chrome (https://chrome.google.com/webstore/detail/popout-tab/pcfcieidiaaobigemjnkclebhnmgfbco) to pop out current tab to its own window
+
+# Acknowledgement
+Keymap forked from benschaeff and modified by me
