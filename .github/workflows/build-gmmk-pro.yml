@@ -1,9 +1,9 @@
-name: Build Firmware
+name: Build GMMK Pro Firmware
 
 on:
   push:
     paths:
-      - 'keyboards/rgbkb/sol3/keymaps/yarmek/**'
+      - 'keyboards/gmmk/pro/ansi/keymaps/yarmek/**'
 
 jobs:
   build:
@@ -15,15 +15,15 @@ jobs:
       - name: Install git submodules
         run: make git-submodule
       - name: Compile firmware
-        run: make rgbkb/sol3/rev1:yarmek
+        run: make gmmk/pro/ansi:yarmek
       - name: Upload compiled firmware (build artifact)
         uses: actions/upload-artifact@v2
         with:
-          name: RGBKB SOL3 QMK Firmware
-          path: rgbkb_sol3_rev1_yarmek.bin
+          name: RGBKB GMMK Pro QMK Firmware
+          path: gmmk_pro_ansi_yarmek.bin
       - name: Upload compiled firmware (tagged release)
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            rgbkb_sol3_rev1_yarmek.bin
+            gmmk_pro_ansi_yarmek.bin
